@@ -3,7 +3,7 @@
 
 	<test name="Demo App" enabled="true">
 		<classes>
-			<class name="com.demo.DemoTest"></class>
+			<class name="com.pom.tests.android.AndroidLoginTests"></class>
 		</classes>
 	</test>
 

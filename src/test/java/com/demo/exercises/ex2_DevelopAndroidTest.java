@@ -54,7 +54,6 @@ public class ex2_DevelopAndroidTest {
         capabilities.setCapability("platformName", "android");
         capabilities.setCapability("automationName", "UiAutomator2");
         capabilities.setCapability("appium:deviceName", "Samsung.*");
-        capabilities.setCapability("appium:platformVersion", "12");
 
          capabilities.setCapability("appium:app",
                "https://github.com/saucelabs/sample-app-mobile/releases/download/2.7.1/Android.SauceLabs.Mobile.Sample.app.2.7.1.apk");
@@ -71,7 +70,7 @@ public class ex2_DevelopAndroidTest {
     }
 
     @Test
-    public void demoTest() {
+    public void ex2_DevelopAndroidTest() {
         System.out.println("*** Start demoTest test ***");
 
         // (1) Add code to set username and password, click on the login button
@@ -80,11 +79,13 @@ public class ex2_DevelopAndroidTest {
         // Accessibility-id test-Password  sendKeys secret_sauce
         // Accessibility-id test-LOGIN click
         driver.findElement(AppiumBy.accessibilityId("test-Username")).sendKeys("standard_user");
+        driver.findElement(AppiumBy.accessibilityId("test-Password")).sendKeys("secret_sauce");
+        driver.findElement(AppiumBy.accessibilityId("test-LOGIN")).click();
 
         // (2) add code to verify we are on the next page
         // Verify using Assert.assertTrue
         // xpath -> //android.widget.ScrollView[@content-desc="test-PRODUCTS"]
-        //Assert.assertTrue(isOnProductsPage());
+        Assert.assertTrue(isOnProductsPage());
 
     }
 
@@ -93,25 +94,25 @@ public class ex2_DevelopAndroidTest {
         System.out.println("*** AfterMethod hook ***");
         // (3) Add code to check if test passed or failed
         try {
-        //     ((JavascriptExecutor) driver).executeScript("sauce:job-result=" + (result.isSuccess() ? "passed" : "failed"));
+            ((JavascriptExecutor) driver).executeScript("sauce:job-result=" + (result.isSuccess() ? "passed" : "failed"));
         } finally {
             driver.quit();
         }
     }
 
-//    public boolean isOnProductsPage() {
-//
-//        //Create an instance of an explicit wait so that we can dynamically wait for an element
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-//
-//        //wait for the product field to be visible and store that element into a variable
-//        try {
-//            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.ScrollView[@content-desc=\"test-PRODUCTS\"]")));
-//        } catch (TimeoutException e){
-//            return false;
-//        }
-//        return true;
-//    }
+    public boolean isOnProductsPage() {
+
+        //Create an instance of an explicit wait so that we can dynamically wait for an element
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+
+        //wait for the product field to be visible and store that element into a variable
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@text='PRODUCTS']")));
+        } catch (TimeoutException e){
+            return false;
+        }
+        return true;
+    }
 
     // (4) in resources -> config -> myDemoTests.xml point to this class
     // <class name="com.demo.exercises.ex2_DevelopAndroidTest"></class>

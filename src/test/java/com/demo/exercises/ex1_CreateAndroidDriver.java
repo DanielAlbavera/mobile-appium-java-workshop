@@ -19,7 +19,7 @@ public class ex1_CreateAndroidDriver {
     private String SAUCE_US_URL = "https://ondemand.us-west-1.saucelabs.com/wd/hub";
 
     // (1) define a driver
-    //private AndroidDriver driver;
+    private AndroidDriver driver;
 
     @BeforeMethod
     public void setup(Method method) throws MalformedURLException {
@@ -41,29 +41,31 @@ public class ex1_CreateAndroidDriver {
         }
 
         // (2) create the needed capabilities
-//        MutableCapabilities capabilities = new MutableCapabilities();
-//        MutableCapabilities sauceOptions = new MutableCapabilities();
+        MutableCapabilities capabilities = new MutableCapabilities();
+        MutableCapabilities sauceOptions = new MutableCapabilities();
 
         // Capabilities: platformName , automationName, appium:deviceName , appium:platformVersion
         // Values: Samsung.* , UiAutomator2, 12, android
 
-
-//         capabilities.setCapability("appium:app",
-//               "https://github.com/saucelabs/sample-app-mobile/releases/download/2.7.1/Android.SauceLabs.Mobile.Sample.app.2.7.1.apk");
-//         capabilities.setCapability("appium:appWaitActivity","com.swaglabsmobileapp.MainActivity");
+        capabilities.setCapability("platformName","android");
+        capabilities.setCapability("appium:deviceName","samsung.*");
+        capabilities.setCapability("appium:app",
+               "https://github.com/saucelabs/sample-app-mobile/releases/download/2.7.1/Android.SauceLabs.Mobile.Sample.app.2.7.1.apk");
+        capabilities.setCapability("appium:appWaitActivity","com.swaglabsmobileapp.MainActivity");
+        capabilities.setCapability("appium:automationName","UiAutomator2");
 
         // Sauce capabilities
-//        sauceOptions.setCapability("name", methodName);
-//        sauceOptions.setCapability("username", System.getenv("SAUCE_USERNAME"));
-//        sauceOptions.setCapability("accessKey", System.getenv("SAUCE_ACCESS_KEY"));
-//        capabilities.setCapability("sauce:options", sauceOptions);
-//
-//        driver = new AndroidDriver(url, capabilities);
+        sauceOptions.setCapability("name", methodName);
+        sauceOptions.setCapability("username", System.getenv("SAUCE_USERNAME"));
+        sauceOptions.setCapability("accessKey", System.getenv("SAUCE_ACCESS_KEY"));
+        capabilities.setCapability("sauce:options", sauceOptions);
+
+        driver = new AndroidDriver(url, capabilities);
 
     }
 
     @Test
-    public void demoTest() {
+    public void ex1_CreateAndroidDriver() {
         System.out.println("*** Start demoTest test ***");
     }
 
@@ -72,7 +74,7 @@ public class ex1_CreateAndroidDriver {
         System.out.println("*** AfterMethod hook ***");
 
         // (3) quit the driver
-//        driver.quit();
+        driver.quit();
     }
 
     // (4) in resources -> config -> myDemoTests.xml point to this class

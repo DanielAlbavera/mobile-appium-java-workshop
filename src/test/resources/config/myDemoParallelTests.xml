@@ -3,13 +3,13 @@
 
 	<test name="Demo App Android" enabled="true">
 		<classes>
-			<class name="com.demo.answers.ex2_DevelopAndroidTest"></class>
+			<class name="com.pom.tests.android.AndroidLoginTests"></class>
 		</classes>
 	</test>
 
 	<test name="Demo App ios" enabled="true">
 		<classes>
-			<class name="com.demo.answers.ex4_DevelopIOSTest"></class>
+			<class name="com.pom.tests.ios.IOSLoginTests"></class>
 		</classes>
 	</test>
 

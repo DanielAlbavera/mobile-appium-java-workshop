@@ -143,8 +143,8 @@ Setup environment variables on your system
 
 Run sanity tests
 
-```java
-mvn clean test -DtestngXmlFile=myDemoTests.xml
+```
+mvn clean test -DtestngXmlFile="myDemoTests.xml"
 ```
 
 <br/>
@@ -176,7 +176,15 @@ mvn clean test -DtestngXmlFile=myDemoTests.xml
 
   </details>
 
-</br>
+<br>
+
+Run sanity tests in Parallel
+
+```
+mvn clean test -DtestngXmlFile="myDemoParallelTests.xml"
+```
+
+<br>
 
 ***✅👏Environment setup is complete if tests passed***
 

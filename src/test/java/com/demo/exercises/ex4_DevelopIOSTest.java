@@ -54,7 +54,6 @@ public class ex4_DevelopIOSTest {
         capabilities.setCapability("platformName", "iOS");
         capabilities.setCapability("automationName", "XCuiTest");
         capabilities.setCapability("appium:deviceName", "iPhone.*");
-        capabilities.setCapability("appium:platformVersion", "14");
 
          capabilities.setCapability("appium:app",
                "https://github.com/saucelabs/sample-app-mobile/releases/download/2.7.1/iOS.RealDevice.SauceLabs.Mobile.Sample.app.2.7.1.ipa");
@@ -70,7 +69,7 @@ public class ex4_DevelopIOSTest {
     }
 
     @Test
-    public void demoTest() {
+    public void ex4_DevelopIOSTest() {
         System.out.println("*** Start demoTest test ***");
 
         // (1) Add code to set username and password, click on the login button
@@ -79,11 +78,13 @@ public class ex4_DevelopIOSTest {
         // Accessibility-id test-Password  sendKeys secret_sauce
         // Accessibility-id test-LOGIN click
         driver.findElement(AppiumBy.accessibilityId("test-Username")).sendKeys("standard_user");
+        driver.findElement(AppiumBy.accessibilityId("test-Password")).sendKeys("secret_sauce");
+        driver.findElement(AppiumBy.accessibilityId("test-LOGIN")).click();
 
         // (2) add code to verify we are on the next page
         // Verify using Assert.assertTrue
         // xpath -> //XCUIElementTypeStaticText[@name="PRODUCTS"]
-        //Assert.assertTrue(isOnProductsPage());
+        Assert.assertTrue(isOnProductsPage());
 
     }
 
@@ -92,25 +93,25 @@ public class ex4_DevelopIOSTest {
         System.out.println("*** AfterMethod hook ***");
         // (3) Add code to check if test passed or failed
         try {
-          //  ((JavascriptExecutor) driver).executeScript("sauce:job-result=" + (result.isSuccess() ? "passed" : "failed"));
+            ((JavascriptExecutor) driver).executeScript("sauce:job-result=" + (result.isSuccess() ? "passed" : "failed"));
         } finally {
             driver.quit();
         }
     }
 
-//    public boolean isOnProductsPage() {
-//
-//        //Create an instance of an explicit wait so that we can dynamically wait for an element
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-//
-//        //wait for the product field to be visible and store that element into a variable
-//        try {
-//            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//XCUIElementTypeStaticText[@name=\"PRODUCTS\"]")));
-//        } catch (TimeoutException e){
-//            return false;
-//        }
-//        return true;
-//    }
+    public boolean isOnProductsPage() {
+
+        //Create an instance of an explicit wait so that we can dynamically wait for an element
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+
+        //wait for the product field to be visible and store that element into a variable
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@name='PRODUCTS']")));
+        } catch (TimeoutException e){
+            return false;
+        }
+        return true;
+    }
 
     // (4) in resources -> config -> myDemoTests.xml point to this class
     // <class name="com.demo.exercises.ex4_DevelopIOSTest"></class>
